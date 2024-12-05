@@ -29,6 +29,10 @@ func main() {
 		Day4Part1(true)
 	} else if puzzle == "04-2" {
 		Day4Part2(true)
+	} else if puzzle == "05-1" {
+		Day5Part1(true)
+	} else if puzzle == "05-2" {
+		Day5Part2(true)
 	} else {
 		panic("not implemented")
 	}
