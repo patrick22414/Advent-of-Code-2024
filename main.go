@@ -33,6 +33,10 @@ func main() {
 		Day5Part1(true)
 	} else if puzzle == "05-2" {
 		Day5Part2(true)
+	} else if puzzle == "06-1" {
+		Day6Part1(true)
+	} else if puzzle == "06-2" {
+		Day6Part2(true)
 	} else {
 		panic("not implemented")
 	}
