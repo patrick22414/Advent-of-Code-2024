@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -28,8 +29,7 @@ func Day7Part2(output bool) {
 		}
 
 		ns := make([]int, 0)
-		ts := strings.Split(operands, " ")
-		for _, t := range ts {
+		for _, t := range strings.Split(operands, " ") {
 			n, err := strconv.Atoi(t)
 			if err != nil {
 				panic(err)
@@ -37,7 +37,7 @@ func Day7Part2(output bool) {
 			ns = append(ns, n)
 		}
 
-		if isEquationPossible3(ns[0], ns[1:], ts[1:], target) {
+		if isEquationPossible3(ns[0], ns[1:], target) {
 			// fmt.Println(line, true)
 			total += target
 		} else {
@@ -50,14 +50,14 @@ func Day7Part2(output bool) {
 	}
 }
 
-func isEquationPossible3(n int, ns []int, ts []string, target int) bool {
+func isEquationPossible3(n int, ns []int, target int) bool {
 	if len(ns) == 0 {
 		return n == target
 	}
 	if len(ns) == 1 {
 		return n+ns[0] == target ||
 			n*ns[0] == target ||
-			concat2(strconv.Itoa(n), ts[0]) == target
+			concat(n, ns[0]) == target
 	}
 
 	// len(ns) > 1
@@ -65,23 +65,11 @@ func isEquationPossible3(n int, ns []int, ts []string, target int) bool {
 		return false
 	}
 
-	return isEquationPossible3(n+ns[0], ns[1:], ts[1:], target) ||
-		isEquationPossible3(n*ns[0], ns[1:], ts[1:], target) ||
-		isEquationPossible3(concat2(strconv.Itoa(n), ts[0]), ns[1:], ts[1:], target)
-}
-
-func concat2(x string, y string) int {
-	n, err := strconv.Atoi(x + y)
-	if err != nil {
-		panic("")
-	}
-	return n
+	return isEquationPossible3(n+ns[0], ns[1:], target) ||
+		isEquationPossible3(n*ns[0], ns[1:], target) ||
+		isEquationPossible3(concat(n, ns[0]), ns[1:], target)
 }
 
 func concat(x, y int) int {
-	n, err := strconv.Atoi(strconv.Itoa(x) + strconv.Itoa(y))
-	if err != nil {
-		panic("")
-	}
-	return n
+	return x*int(math.Pow10(int(math.Log10(float64(y))))) + y
 }
