@@ -25,3 +25,15 @@ func BenchmarkDay7Part2(b *testing.B) {
 		Day7Part2(false)
 	}
 }
+
+func BenchmarkDay8Part1(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Day8Part1(false)
+	}
+}
+
+func BenchmarkDay8Part2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Day8Part2(false)
+	}
+}

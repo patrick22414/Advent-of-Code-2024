@@ -8,3 +8,5 @@
 | BenchmarkDay6Part2-12 | 19         | 0.061715488 s/op |  93.024 kB/op |  534 allocs/op |
 | BenchmarkDay7Part1-12 | 811        | 0.001448422 s/op | 264.745 kB/op | 5320 allocs/op |
 | BenchmarkDay7Part2-12 | 5          | 0.210031537 s/op | 264.747 kB/op | 5320 allocs/op |
+| BenchmarkDay8Part1-12 | 7616       | 0.000134222 s/op |  59.032 kB/op |  232 allocs/op |
+| BenchmarkDay8Part2-12 | 4839       | 0.000223680 s/op | 102.437 kB/op |  255 allocs/op |

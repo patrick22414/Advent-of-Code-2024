@@ -41,6 +41,10 @@ func main() {
 		Day7Part1(true)
 	} else if puzzle == "07-2" {
 		Day7Part2(true)
+	} else if puzzle == "08-1" {
+		Day8Part1(true)
+	} else if puzzle == "08-2" {
+		Day8Part2(true)
 	} else {
 		panic("not implemented")
 	}
