@@ -1,23 +1,14 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 )
 
 func Day8Part2(output bool) {
-	f, err := os.Open("input/08.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	s := bufio.NewScanner(f)
 	// map of frequency to locations
 	antennas := make(map[byte][]Vec)
 	i, n := 0, -1
-	for s.Scan() {
-		line := s.Text()
+	for line := range ReadInput("input/08.txt") {
 		if n == -1 {
 			n = len(line) // max y of input
 		}
