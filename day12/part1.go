@@ -7,6 +7,8 @@ import (
 func Part1() int {
 	farm := map2d.FromInput("./input.txt")
 
+	bufNeighbors := [4]map2d.Pos{}
+	// fmt.Println(bufNeighbors)
 	regions, regionCount := make([][]int, farm.MaxX()), 0
 	for i := range farm.MaxX() {
 		regions[i] = make([]int, farm.MaxY())
@@ -31,7 +33,7 @@ func Part1() int {
 
 				regions[p.X][p.Y] = regionCount
 
-				ns := farm.Neighbors4(p)
+				ns := farm.BetterNeighbors4(p, &bufNeighbors)
 				for _, n := range ns {
 					if farm.At(n) == plant && regions[n.X][n.Y] == 0 {
 						stack = append(stack, n)

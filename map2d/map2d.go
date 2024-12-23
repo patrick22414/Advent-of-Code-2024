@@ -70,3 +70,20 @@ func (m *Map2D) Neighbors4(p Pos) (ns []Pos) {
 	}
 	return
 }
+
+func (m *Map2D) BetterNeighbors4(p Pos, buf *[4]Pos) (ns []Pos) {
+	ns = buf[:0]
+	if x := p.X - 1; x >= 0 {
+		ns = append(ns, Pos{x, p.Y})
+	}
+	if y := p.Y + 1; y < m.MaxY() {
+		ns = append(ns, Pos{p.X, y})
+	}
+	if x := p.X + 1; x < m.MaxX() {
+		ns = append(ns, Pos{x, p.Y})
+	}
+	if y := p.Y - 1; y >= 0 {
+		ns = append(ns, Pos{p.X, y})
+	}
+	return
+}
