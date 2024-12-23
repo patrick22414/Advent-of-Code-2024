@@ -1,9 +1,9 @@
 package day12
 
-import "github.com/patrick22414/Advent-of-Code-2024/map2d"
+import "github.com/patrick22414/Advent-of-Code-2024/grid"
 
 func Part2() int {
-	farm := map2d.FromInput("./input.txt")
+	farm := grid.FromInput("./input.txt")
 
 	regions, regionCount := make([][]int, farm.MaxX()), 0
 	for i := range farm.MaxX() {
@@ -17,11 +17,11 @@ func Part2() int {
 
 			// create new region
 			regionCount++
-			pos := map2d.Pos{X: i, Y: j}
+			pos := grid.Pos{X: i, Y: j}
 			plant := farm.At(pos)
 
 			// depth-first traversal
-			stack := []map2d.Pos{pos}
+			stack := []grid.Pos{pos}
 			for len(stack) > 0 {
 				// add neighboring, same-plant, not-yet-colored plots
 				p := stack[len(stack)-1]

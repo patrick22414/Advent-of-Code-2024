@@ -1,13 +1,13 @@
 package day12
 
 import (
-	"github.com/patrick22414/Advent-of-Code-2024/map2d"
+	"github.com/patrick22414/Advent-of-Code-2024/grid"
 )
 
 func Part1() int {
-	farm := map2d.FromInput("./input.txt")
+	farm := grid.FromInput("./input.txt")
 
-	bufNeighbors := [4]map2d.Pos{}
+	bufNeighbors := [4]grid.Pos{}
 	// fmt.Println(bufNeighbors)
 	regions, regionCount := make([][]int, farm.MaxX()), 0
 	for i := range farm.MaxX() {
@@ -21,11 +21,11 @@ func Part1() int {
 
 			// create new region
 			regionCount++
-			pos := map2d.Pos{X: i, Y: j}
+			pos := grid.Pos{X: i, Y: j}
 			plant := farm.At(pos)
 
 			// depth-first traversal
-			stack := []map2d.Pos{pos}
+			stack := []grid.Pos{pos}
 			for len(stack) > 0 {
 				// add neighboring, same-plant, not-yet-colored plots
 				p := stack[len(stack)-1]
@@ -52,7 +52,7 @@ func Part1() int {
 	}
 	for x, row := range *farm {
 		for y, plant := range row {
-			pos := map2d.Pos{X: x, Y: y}
+			pos := grid.Pos{X: x, Y: y}
 			for _, n := range farm.Neighbors4(pos) {
 				if farm.At(n) == plant {
 					perimeters[x][y]--
