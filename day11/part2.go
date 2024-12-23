@@ -49,7 +49,7 @@ func Part2() int {
 	}
 
 	for range 75 {
-		newStoneCount := make(map[int]int)
+		newStoneCount := make(map[int]int, len(stoneCount))
 		for n, count := range stoneCount {
 			n1, n2 := blink(n)
 			newStoneCount[n1] += count
