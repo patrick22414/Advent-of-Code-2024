@@ -1,40 +1,11 @@
-package main
+package day02
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
-
-func Day2Part1() {
-	f, err := os.Open("./input/02.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	s := bufio.NewScanner(f)
-	safeReports := 0
-	for s.Scan() {
-		line := s.Text()
-
-		ts := strings.Split(line, " ")
-		ns := make([]int, len(ts))
-		for i, token := range ts {
-			ns[i], err = strconv.Atoi(token)
-			if err != nil {
-				panic(err)
-			}
-		}
-
-		if IsSafe(ns) {
-			safeReports++
-		}
-	}
-
-	fmt.Println(safeReports)
-}
 
 func IsSafe(s []int) bool {
 	if len(s) == 0 {
@@ -61,4 +32,25 @@ func IsSafe(s []int) bool {
 		}
 	}
 	return true
+}
+
+func Part1() int {
+	safeReports := 0
+	for line := range readinput.ReadInput("./input.txt") {
+		ts := strings.Fields(line)
+		ns := make([]int, len(ts))
+		for i, token := range ts {
+			n, err := strconv.Atoi(token)
+			if err != nil {
+				panic(err)
+			}
+			ns[i] = n
+		}
+
+		if IsSafe(ns) {
+			safeReports++
+		}
+	}
+
+	return safeReports
 }

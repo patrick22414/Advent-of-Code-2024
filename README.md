@@ -4,8 +4,10 @@
 
 | Day             | Part                | Iterations |             Time |            Mem |            Alloc |
 | --------------- | ------------------- | ---------- | ---------------: | -------------: | ---------------: |
-| **1**           | 1                   | 2374       |   0.437735 ms/op |   70.963 kB/op |   1032 allocs/op |
-|                 | 2                   | 2682       |   0.434636 ms/op |  114.300 kB/op |   1077 allocs/op |
+| [**1**](day01)  | [1](day01/part1.go) | 2374       |   0.437735 ms/op |   70.963 kB/op |   1032 allocs/op |
+|                 | [2](day01/part2.go) | 2682       |   0.434636 ms/op |  114.300 kB/op |   1077 allocs/op |
+| [**2**](day02)  | [1](day02/part1.go) | 1783       |   0.597133 ms/op |  187.658 kB/op |   3009 allocs/op |
+|                 | [2](day02/part2.go) | 1384       |   0.812759 ms/op |  363.773 kB/op |   6515 allocs/op |
 | **3**           | 2                   | 2964       |   0.369904 ms/op |  148.848 kB/op |    827 allocs/op |
 | **6**           | 2                   | 19         |  61.715488 ms/op |   93.024 kB/op |    534 allocs/op |
 | **7**           | 1                   | 811        |   1.448422 ms/op |  264.745 kB/op |   5320 allocs/op |

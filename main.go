@@ -13,11 +13,7 @@ func main() {
 
 	puzzle := os.Args[1]
 
-	if puzzle == "02-1" {
-		Day2Part1()
-	} else if puzzle == "02-2" {
-		Day2Part2()
-	} else if puzzle == "03-1" {
+	if puzzle == "03-1" {
 		Day3Part1()
 	} else if puzzle == "03-2" {
 		Day3Part2(true)
