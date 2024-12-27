@@ -8,13 +8,12 @@ func Part1() int {
 	farm := grid.FromInput("./input.txt")
 
 	bufNeighbors := [4]grid.Pos{}
-	// fmt.Println(bufNeighbors)
-	regions, regionCount := make([][]int, farm.MaxX()), 0
-	for i := range farm.MaxX() {
-		regions[i] = make([]int, farm.MaxY())
+	regions, regionCount := make([][]int, farm.SizeX()), 0
+	for i := range farm.SizeX() {
+		regions[i] = make([]int, farm.SizeY())
 	}
-	for i := range farm.MaxX() {
-		for j := range farm.MaxY() {
+	for i := range farm.SizeX() {
+		for j := range farm.SizeY() {
 			if regions[i][j] != 0 {
 				continue
 			}
@@ -43,17 +42,17 @@ func Part1() int {
 		}
 	}
 
-	perimeters := make([][]int, farm.MaxX()) // perimeter of each plot
-	for i := range farm.MaxX() {
-		perimeters[i] = make([]int, farm.MaxY())
-		for j := range farm.MaxY() {
+	perimeters := make([][]int, farm.SizeX()) // perimeter of each plot
+	for i := range farm.SizeX() {
+		perimeters[i] = make([]int, farm.SizeY())
+		for j := range farm.SizeY() {
 			perimeters[i][j] = 4
 		}
 	}
 	for x, row := range *farm {
 		for y, plant := range row {
 			pos := grid.Pos{X: x, Y: y}
-			for _, n := range farm.Neighbors4(pos) {
+			for _, n := range farm.BetterNeighbors4(pos, &bufNeighbors) {
 				if farm.At(n) == plant {
 					perimeters[x][y]--
 				}

@@ -29,11 +29,11 @@ func (g *Grid) At(p Pos) byte {
 	return (*g)[p.X][p.Y]
 }
 
-func (g *Grid) MaxX() int {
+func (g *Grid) SizeX() int {
 	return len(*g)
 }
 
-func (g *Grid) MaxY() int {
+func (g *Grid) SizeY() int {
 	return len((*g)[0])
 }
 
@@ -46,10 +46,10 @@ func (g *Grid) String() string {
 }
 
 func (g *Grid) Neighbors2(p Pos) (ns []Pos) {
-	if y := p.Y + 1; y < g.MaxY() {
+	if y := p.Y + 1; y < g.SizeY() {
 		ns = append(ns, Pos{p.X, y})
 	}
-	if x := p.X + 1; x < g.MaxX() {
+	if x := p.X + 1; x < g.SizeX() {
 		ns = append(ns, Pos{x, p.Y})
 	}
 	return
@@ -59,10 +59,10 @@ func (g *Grid) Neighbors4(p Pos) (ns []Pos) {
 	if x := p.X - 1; x >= 0 {
 		ns = append(ns, Pos{x, p.Y})
 	}
-	if y := p.Y + 1; y < g.MaxY() {
+	if y := p.Y + 1; y < g.SizeY() {
 		ns = append(ns, Pos{p.X, y})
 	}
-	if x := p.X + 1; x < g.MaxX() {
+	if x := p.X + 1; x < g.SizeX() {
 		ns = append(ns, Pos{x, p.Y})
 	}
 	if y := p.Y - 1; y >= 0 {
@@ -76,10 +76,10 @@ func (g *Grid) BetterNeighbors4(p Pos, buf *[4]Pos) (ns []Pos) {
 	if x := p.X - 1; x >= 0 {
 		ns = append(ns, Pos{x, p.Y})
 	}
-	if y := p.Y + 1; y < g.MaxY() {
+	if y := p.Y + 1; y < g.SizeY() {
 		ns = append(ns, Pos{p.X, y})
 	}
-	if x := p.X + 1; x < g.MaxX() {
+	if x := p.X + 1; x < g.SizeX() {
 		ns = append(ns, Pos{x, p.Y})
 	}
 	if y := p.Y - 1; y >= 0 {
