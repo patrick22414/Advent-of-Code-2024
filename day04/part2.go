@@ -1,21 +1,12 @@
-package main
+package day04
 
 import (
-	"bufio"
-	"fmt"
-	"os"
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
 
-func Day4Part2(output bool) {
-	f, err := os.Open("input/04.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	s := bufio.NewScanner(f)
+func Part2() int {
 	var m []string
-	for s.Scan() {
-		line := s.Text()
+	for line := range readinput.ReadInput("./input.txt") {
 		m = append(m, line)
 	}
 
@@ -35,7 +26,5 @@ func Day4Part2(output bool) {
 		}
 	}
 
-	if output {
-		fmt.Println(count)
-	}
+	return count
 }
