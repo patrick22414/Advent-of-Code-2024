@@ -59,5 +59,5 @@ func Part2() int {
 		}
 	}
 
-	return 0
+	return -1 // dummy output
 }

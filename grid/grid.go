@@ -25,8 +25,16 @@ func FromInput(filename string) *Grid {
 	return &g
 }
 
+func (g *Grid) AppendLine(line []byte) {
+	*g = append((*g), line)
+}
+
 func (g *Grid) At(p Pos) byte {
 	return (*g)[p.X][p.Y]
+}
+
+func (g *Grid) Set(p Pos, b byte) {
+	(*g)[p.X][p.Y] = b
 }
 
 func (g *Grid) SizeX() int {
