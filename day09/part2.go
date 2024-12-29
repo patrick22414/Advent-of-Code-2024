@@ -1,9 +1,10 @@
-package main
+package day09
 
 import (
 	"container/list"
-	"fmt"
 	"strconv"
+
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
 
 type ListDisk struct{ ls *list.List }
@@ -66,9 +67,9 @@ func (d ListDisk) String() string {
 	return s
 }
 
-func Day9Part2(output bool) {
+func Part2() int {
 	disk := ListDisk{list.New()}
-	for line := range ReadInput("input/09.txt") {
+	for line := range readinput.ReadInput("./input.txt") {
 		for i := 0; i < len(line); i += 2 {
 			if line[i] != '0' {
 				disk.Push(DiskFile{id: i / 2, size: int(line[i] - '0')})
@@ -112,7 +113,6 @@ func Day9Part2(output bool) {
 			i += v.size
 		}
 	}
-	if output {
-		fmt.Println(total)
-	}
+
+	return total
 }

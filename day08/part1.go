@@ -1,10 +1,6 @@
-package main
+package day08
 
-import (
-	"bufio"
-	"fmt"
-	"os"
-)
+import "github.com/patrick22414/Advent-of-Code-2024/readinput"
 
 type Vec struct{ x, y int }
 
@@ -23,18 +19,11 @@ func antinodes(a1, a2 Vec) []Vec {
 	}
 }
 
-func Day8Part1(output bool) {
-	f, err := os.Open("input/08.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	s := bufio.NewScanner(f)
+func Part1() int {
 	// map of frequency to locations
 	antennas := make(map[byte][]Vec)
 	i, n := 0, -1
-	for s.Scan() {
-		line := s.Text()
+	for line := range readinput.ReadInput("./input.txt") {
 		if n == -1 {
 			n = len(line) // max y of input
 		}
@@ -67,7 +56,6 @@ func Day8Part1(output bool) {
 			total++
 		}
 	}
-	if output {
-		fmt.Println(total)
-	}
+
+	return total
 }

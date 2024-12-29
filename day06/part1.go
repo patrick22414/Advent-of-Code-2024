@@ -1,10 +1,9 @@
-package main
+package day06
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"slices"
+
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
 
 const (
@@ -17,18 +16,11 @@ const (
 	Left  byte = '<'
 )
 
-func Day6Part1(output bool) {
-	f, err := os.Open("input/06.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	s := bufio.NewScanner(f)
-
+func Part1() int {
 	area := make([][]byte, 0)
 	x, y := 0, -1 // guard position
-	for s.Scan() {
-		line := []byte(s.Text())
+	for lineString := range readinput.ReadInput("./input.txt") {
+		line := []byte(lineString)
 		area = append(area, line)
 		if y < 0 {
 			y = slices.Index(line, Up) // current position of the guard
@@ -70,8 +62,5 @@ func Day6Part1(output bool) {
 			}
 		}
 	}
-
-	if output {
-		fmt.Println(total)
-	}
+	return total
 }

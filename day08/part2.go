@@ -1,14 +1,12 @@
-package main
+package day08
 
-import (
-	"fmt"
-)
+import "github.com/patrick22414/Advent-of-Code-2024/readinput"
 
-func Day8Part2(output bool) {
+func Part2() int {
 	// map of frequency to locations
 	antennas := make(map[byte][]Vec)
 	i, n := 0, -1
-	for line := range ReadInput("input/08.txt") {
+	for line := range readinput.ReadInput("./input.txt") {
 		if n == -1 {
 			n = len(line) // max y of input
 		}
@@ -46,7 +44,5 @@ func Day8Part2(output bool) {
 	// fmt.Println(antennas)
 	// fmt.Println(uniques)
 
-	if output {
-		fmt.Println(len(uniques))
-	}
+	return len(uniques)
 }

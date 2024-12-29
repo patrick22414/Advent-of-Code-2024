@@ -1,81 +1,10 @@
-package main
+package day06
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"slices"
+
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
-
-func Day6Part2(output bool) {
-	f, err := os.Open("input/06.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	s := bufio.NewScanner(f)
-
-	area := make([][]byte, 0)
-	x, y := 0, -1 // guard position
-	for s.Scan() {
-		line := []byte(s.Text())
-		area = append(area, line)
-		if y < 0 {
-			y = slices.Index(line, byte(Up)) // current position of the guard
-			if y < 0 {
-				x++
-			}
-		}
-	}
-
-	areaClean := slices.Clone(area)
-	areaCopy := slices.Clone(area)
-	for i, row := range area {
-		areaClean[i] = slices.Clone(row)
-		areaCopy[i] = slices.Clone(row)
-	}
-
-	// mark the area
-	Patrol(area, x, y)
-	// total := 0
-	// for _, row := range area {
-	// 	fmt.Println(string(row))
-	// 	for _, cell := range row {
-	// 		if cell != Empty && cell != Wall {
-	// 			total++
-	// 		}
-	// 	}
-	// }
-
-	// then try putting Wall at each marked position
-	count := 1
-	countLoops := 0
-	for i, row := range area {
-		for j, cell := range row {
-			if i == x && j == y {
-				continue // cannot put Wall at Guard position
-			}
-
-			if cell != Empty && cell != Wall {
-				// fmt.Println(count, "/", total-1) // progress bar
-				count++
-
-				// clear out test area
-				for ii, rowClean := range areaClean {
-					copy(areaCopy[ii], rowClean)
-				}
-				areaCopy[i][j] = Wall // add a new Wall
-				if Patrol(areaCopy, x, y) {
-					countLoops++
-				}
-			}
-		}
-	}
-
-	if output {
-		fmt.Println(countLoops)
-	}
-}
 
 func DirectionMarker(dx, dy int) byte {
 	if dx == -1 && dy == 0 {
@@ -102,7 +31,7 @@ func MarkerDirection(marker byte) (dx, dy int) {
 	} else {
 		panic("not a starting position")
 	}
-	return
+	return dx, dy
 }
 
 // Given a map of the area and a starting position (x, y), mark the path of the
@@ -139,4 +68,55 @@ func Patrol(area [][]byte, x, y int) (isLoop bool) {
 		}
 	}
 	return false
+}
+
+func Part2() int {
+	area := make([][]byte, 0)
+	x, y := 0, -1 // guard position
+	for lineString := range readinput.ReadInput("./input.txt") {
+		line := []byte(lineString)
+		area = append(area, line)
+		if y < 0 {
+			y = slices.Index(line, Up) // current position of the guard
+			if y < 0 {
+				x++
+			}
+		}
+	}
+
+	areaClean := slices.Clone(area)
+	areaCopy := slices.Clone(area)
+	for i, row := range area {
+		areaClean[i] = slices.Clone(row)
+		areaCopy[i] = slices.Clone(row)
+	}
+
+	// mark the area
+	Patrol(area, x, y)
+
+	// then try putting Wall at each marked position
+	count := 1
+	countLoops := 0
+	for i, row := range area {
+		for j, cell := range row {
+			if i == x && j == y {
+				continue // cannot put Wall at Guard position
+			}
+
+			if cell != Empty && cell != Wall {
+				// fmt.Println(count, "/", total-1) // progress bar
+				count++
+
+				// clear out test area
+				for ii, rowClean := range areaClean {
+					copy(areaCopy[ii], rowClean)
+				}
+				areaCopy[i][j] = Wall // add a new Wall
+				if Patrol(areaCopy, x, y) {
+					countLoops++
+				}
+			}
+		}
+	}
+	return countLoops
 }

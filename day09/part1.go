@@ -1,9 +1,10 @@
-package main
+package day09
 
 import (
-	"fmt"
 	"slices"
 	"strconv"
+
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
 
 type DiskFile struct {
@@ -36,15 +37,9 @@ func (d Disk) ActualSize() (s int) {
 	return
 }
 
-// type DiskScan struct {
-// 	disk     Disk // the disk to be scanned
-// 	head     int  // the block id currently pointing to
-// 	headFile int  // the file currently pointing to
-// }
-
-func Day9Part1(output bool) {
+func Part1() int {
 	disk := make(Disk, 0)
-	for line := range ReadInput("input/09.txt") {
+	for line := range readinput.ReadInput("./input.txt") {
 		for i := 0; i < len(line); i += 2 {
 			disk = append(disk, DiskFile{id: i / 2, size: int(line[i] - '0')})
 
@@ -90,7 +85,5 @@ outer:
 		}
 	}
 
-	if output {
-		fmt.Println(total)
-	}
+	return total
 }

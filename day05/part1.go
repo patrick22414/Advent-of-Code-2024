@@ -1,26 +1,33 @@
-package main
+package day05
 
 import (
-	"bufio"
-	"fmt"
-	"os"
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/patrick22414/Advent-of-Code-2024/readinput"
 )
 
-func Day5Part1(output bool) {
-	f, err := os.Open("input/05.txt")
-	if err != nil {
-		panic(err)
+func IsOrderCorrect(book []int, rules map[int][]int) bool {
+	for j, b := range book {
+		rule, ok := rules[b]
+		if !ok {
+			continue
+		}
+
+		for _, a := range book[:j] {
+			if slices.Contains(rule, a) {
+				return false
+			}
+		}
 	}
+	return true
+}
 
-	s := bufio.NewScanner(f)
-
-	// scan for rules
+func Part1() int {
 	rules := make(map[int][]int, 0)
-	for s.Scan() {
-		line := s.Text()
+	input := readinput.ReadInput("./input.txt")
+	for line := range input {
 		a, b, ok := strings.Cut(line, "|")
 		if !ok {
 			break
@@ -40,8 +47,7 @@ func Day5Part1(output bool) {
 
 	// scan for books (sequences of pages)
 	books := make([][]int, 0)
-	for s.Scan() {
-		line := s.Text()
+	for line := range input {
 		pages := strings.Split(line, ",")
 		book := make([]int, 0)
 		for _, p := range pages {
@@ -61,23 +67,5 @@ func Day5Part1(output bool) {
 		}
 	}
 
-	if output {
-		fmt.Println(total)
-	}
-}
-
-func IsOrderCorrect(book []int, rules map[int][]int) bool {
-	for j, b := range book {
-		rule, ok := rules[b]
-		if !ok {
-			continue
-		}
-
-		for _, a := range book[:j] {
-			if slices.Contains(rule, a) {
-				return false
-			}
-		}
-	}
-	return true
+	return total
 }
